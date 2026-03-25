@@ -1,0 +1,1577 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Montreval Mind Institute — Entscheidungspsychologie für Unternehmer, Investoren und Führungskräfte." />
+  <title>Montreval Mind Institute</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'mmi-black': '#0A0A0A',
+            'mmi-surface': '#111111',
+            'mmi-gold': '#C9A84C',
+            'mmi-gold-dim': '#8A7350',
+            'mmi-warm': '#F0ECE2',
+            'mmi-secondary': '#8A8690',
+          },
+          fontFamily: {
+            serif: ['Cormorant Garamond', 'Georgia', 'serif'],
+            sans: ['Outfit', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          screens: {
+            'sm': '640px',
+            'md': '768px',
+            'lg': '1024px',
+            'xl': '1440px',
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    /* ═══════════════════════════════════════
+       CSS CUSTOM PROPERTIES & BASE
+       ═══════════════════════════════════════ */
+    :root {
+      --mmi-black: #0A0A0A;
+      --mmi-surface: #111111;
+      --mmi-gold: #C9A84C;
+      --mmi-gold-dim: #8A7350;
+      --mmi-warm-white: #F0ECE2;
+      --mmi-text-secondary: #8A8690;
+      --glass-bg: rgba(18, 18, 26, 0.55);
+      --glass-border: rgba(201, 168, 76, 0.2);
+      --glass-blur: 24px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--mmi-black);
+      color: var(--mmi-warm-white);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Outfit', sans-serif;
+      background: var(--mmi-black);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    ::selection {
+      background: rgba(201, 168, 76, 0.3);
+      color: var(--mmi-warm-white);
+    }
+
+    /* ═══════════════════════════════════════
+       KEYFRAMES
+       ═══════════════════════════════════════ */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(32px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInLeft {
+      from { opacity: 0; transform: translateX(-32px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes scanLine {
+      0% { transform: translateY(-100vh); }
+      100% { transform: translateY(200vh); }
+    }
+
+    @keyframes goldPulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 0.8; }
+    }
+
+    @keyframes heroLineExpand {
+      from { width: 0; }
+      to { width: 64px; }
+    }
+
+    @keyframes glowPulse {
+      0%, 100% { box-shadow: 0 0 20px rgba(201, 168, 76, 0.15); }
+      50% { box-shadow: 0 0 40px rgba(201, 168, 76, 0.3); }
+    }
+
+    /* ═══════════════════════════════════════
+       SCAN LINE OVERLAY
+       ═══════════════════════════════════════ */
+    .scan-line {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(201, 168, 76, 0.06) 20%, rgba(201, 168, 76, 0.06) 80%, transparent 100%);
+      z-index: 9999;
+      pointer-events: none;
+      animation: scanLine 8s linear infinite;
+    }
+
+    /* ═══════════════════════════════════════
+       GOLD DIVIDER
+       ═══════════════════════════════════════ */
+    .gold-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, var(--mmi-gold-dim) 30%, var(--mmi-gold) 50%, var(--mmi-gold-dim) 70%, transparent 100%);
+      border: none;
+      opacity: 0.4;
+    }
+
+    /* ═══════════════════════════════════════
+       GLASS CARD
+       ═══════════════════════════════════════ */
+    .glass-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(var(--glass-blur));
+      -webkit-backdrop-filter: blur(var(--glass-blur));
+      border: 1px solid var(--glass-border);
+      transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1),
+                  box-shadow 0.5s cubic-bezier(0.23, 1, 0.32, 1),
+                  border-color 0.5s ease;
+    }
+
+    .glass-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4), 0 0 24px rgba(201, 168, 76, 0.08);
+      border-color: rgba(201, 168, 76, 0.4);
+    }
+
+    .glass-card-highlight {
+      border-color: rgba(201, 168, 76, 0.45);
+      box-shadow: 0 0 32px rgba(201, 168, 76, 0.1);
+      animation: glowPulse 4s ease-in-out infinite;
+    }
+
+    /* ═══════════════════════════════════════
+       BUTTONS
+       ═══════════════════════════════════════ */
+    .btn-gold {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 36px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--mmi-black);
+      background: var(--mmi-gold);
+      border: 1px solid var(--mmi-gold);
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-gold::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .btn-gold:hover {
+      box-shadow: 0 0 32px rgba(201, 168, 76, 0.35), 0 4px 16px rgba(0, 0, 0, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .btn-gold:hover::after { opacity: 1; }
+
+    .btn-gold-outline {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 36px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--mmi-gold);
+      background: transparent;
+      border: 1px solid var(--mmi-gold);
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      text-decoration: none;
+    }
+
+    .btn-gold-outline:hover {
+      background: var(--mmi-gold);
+      color: var(--mmi-black);
+      box-shadow: 0 0 24px rgba(201, 168, 76, 0.25);
+      transform: translateY(-2px);
+    }
+
+    /* ═══════════════════════════════════════
+       REVEAL ANIMATIONS
+       ═══════════════════════════════════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.8s cubic-bezier(0.23, 1, 0.32, 1),
+                  transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-32px);
+      transition: opacity 0.8s cubic-bezier(0.23, 1, 0.32, 1),
+                  transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .reveal-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* ═══════════════════════════════════════
+       FAQ ACCORDION
+       ═══════════════════════════════════════ */
+    .faq-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s cubic-bezier(0.23, 1, 0.32, 1),
+                  padding 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .faq-content.open {
+      max-height: 300px;
+    }
+
+    /* ═══════════════════════════════════════
+       NAVIGATION
+       ═══════════════════════════════════════ */
+    .nav-scrolled {
+      background: rgba(10, 10, 10, 0.95) !important;
+      backdrop-filter: blur(24px) !important;
+      -webkit-backdrop-filter: blur(24px) !important;
+      border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+    }
+
+    /* ═══════════════════════════════════════
+       SKIP LINK (A11Y)
+       ═══════════════════════════════════════ */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--mmi-gold);
+      color: var(--mmi-black);
+      padding: 8px 24px;
+      z-index: 10000;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    .skip-link:focus {
+      top: 8px;
+    }
+
+    /* ═══════════════════════════════════════
+       FOCUS STYLES
+       ═══════════════════════════════════════ */
+    :focus-visible {
+      outline: 2px solid var(--mmi-gold);
+      outline-offset: 3px;
+    }
+
+    /* ═══════════════════════════════════════
+       REDUCED MOTION
+       ═══════════════════════════════════════ */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .scan-line { display: none; }
+      .reveal, .reveal-left { opacity: 1; transform: none; }
+      html { scroll-behavior: auto; }
+    }
+
+    /* ═══════════════════════════════════════
+       CUSTOM SCROLLBAR
+       ═══════════════════════════════════════ */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--mmi-black); }
+    ::-webkit-scrollbar-thumb { background: var(--mmi-gold-dim); }
+    ::-webkit-scrollbar-thumb:hover { background: var(--mmi-gold); }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Zum Inhalt springen</a>
+  <div id="root"></div>
+
+  <!-- React 18 -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel" data-type="module">
+    const { useState, useEffect, useRef, useCallback, useMemo } = React;
+
+    /* ═══════════════════════════════════════════════════════
+       HOOKS
+       ═══════════════════════════════════════════════════════ */
+
+    function useInView(options = {}) {
+      const [isVisible, setIsVisible] = useState(false);
+      const ref = useRef(null);
+
+      useEffect(() => {
+        const el = ref.current;
+        if (!el) return;
+
+        const check = () => {
+          const rect = el.getBoundingClientRect();
+          return rect.top < window.innerHeight + 80;
+        };
+
+        if (check()) {
+          setIsVisible(true);
+          return;
+        }
+
+        // Use both IntersectionObserver and scroll listener for reliability
+        let done = false;
+        const markVisible = () => {
+          if (!done) {
+            done = true;
+            setIsVisible(true);
+            observer.disconnect();
+            window.removeEventListener('scroll', onScroll);
+          }
+        };
+
+        const observer = new IntersectionObserver(
+          ([entry]) => { if (entry.isIntersecting) markVisible(); },
+          { threshold: 0, rootMargin: '80px 0px', ...options }
+        );
+        observer.observe(el);
+
+        let ticking = false;
+        const onScroll = () => {
+          if (!ticking && !done) {
+            ticking = true;
+            requestAnimationFrame(() => {
+              if (check()) markVisible();
+              ticking = false;
+            });
+          }
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+
+        return () => {
+          observer.disconnect();
+          window.removeEventListener('scroll', onScroll);
+        };
+      }, []);
+
+      return [ref, isVisible];
+    }
+
+    function useScrolled(threshold = 50) {
+      const [scrolled, setScrolled] = useState(false);
+      useEffect(() => {
+        let ticking = false;
+        const onScroll = () => {
+          if (!ticking) {
+            requestAnimationFrame(() => {
+              setScrolled(window.scrollY > threshold);
+              ticking = false;
+            });
+            ticking = true;
+          }
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        return () => window.removeEventListener('scroll', onScroll);
+      }, [threshold]);
+      return scrolled;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       SHADER BACKGROUND (WebGL)
+       ═══════════════════════════════════════════════════════ */
+
+    function ShaderBackground() {
+      const canvasRef = useRef(null);
+
+      const vsSource = `
+        attribute vec4 aVertexPosition;
+        void main() {
+          gl_Position = aVertexPosition;
+        }
+      `;
+
+      // Fragment shader — MMI gold/black palette
+      const fsSource = `
+        precision highp float;
+        uniform vec2 iResolution;
+        uniform float iTime;
+
+        const float overallSpeed = 0.2;
+        const float gridSmoothWidth = 0.015;
+        const float axisWidth = 0.05;
+        const float majorLineWidth = 0.025;
+        const float minorLineWidth = 0.0125;
+        const float majorLineFrequency = 5.0;
+        const float minorLineFrequency = 1.0;
+        const vec4 gridColor = vec4(0.5);
+        const float scale = 5.0;
+
+        // MMI gold line color
+        const vec4 lineColor = vec4(0.79, 0.66, 0.30, 1.0);
+        const float minLineWidth = 0.01;
+        const float maxLineWidth = 0.2;
+        const float lineSpeed = 1.0 * overallSpeed;
+        const float lineAmplitude = 1.0;
+        const float lineFrequency = 0.2;
+        const float warpSpeed = 0.2 * overallSpeed;
+        const float warpFrequency = 0.5;
+        const float warpAmplitude = 1.0;
+        const float offsetFrequency = 0.5;
+        const float offsetSpeed = 1.33 * overallSpeed;
+        const float minOffsetSpread = 0.6;
+        const float maxOffsetSpread = 2.0;
+        const int linesPerGroup = 16;
+
+        #define drawCircle(pos, radius, coord) smoothstep(radius + gridSmoothWidth, radius, length(coord - (pos)))
+        #define drawSmoothLine(pos, halfWidth, t) smoothstep(halfWidth, 0.0, abs(pos - (t)))
+        #define drawCrispLine(pos, halfWidth, t) smoothstep(halfWidth + gridSmoothWidth, halfWidth, abs(pos - (t)))
+        #define drawPeriodicLine(freq, width, t) drawCrispLine(freq / 2.0, width, abs(mod(t, freq) - (freq) / 2.0))
+
+        float drawGridLines(float axis) {
+          return drawCrispLine(0.0, axisWidth, axis)
+                + drawPeriodicLine(majorLineFrequency, majorLineWidth, axis)
+                + drawPeriodicLine(minorLineFrequency, minorLineWidth, axis);
+        }
+
+        float drawGrid(vec2 space) {
+          return min(1.0, drawGridLines(space.x) + drawGridLines(space.y));
+        }
+
+        float random(float t) {
+          return (cos(t) + cos(t * 1.3 + 1.3) + cos(t * 1.4 + 1.4)) / 3.0;
+        }
+
+        float getPlasmaY(float x, float horizontalFade, float offset) {
+          return random(x * lineFrequency + iTime * lineSpeed) * horizontalFade * lineAmplitude + offset;
+        }
+
+        void main() {
+          vec2 fragCoord = gl_FragCoord.xy;
+          vec4 fragColor;
+          vec2 uv = fragCoord.xy / iResolution.xy;
+          vec2 space = (fragCoord - iResolution.xy / 2.0) / iResolution.x * 2.0 * scale;
+
+          float horizontalFade = 1.0 - (cos(uv.x * 6.28) * 0.5 + 0.5);
+          float verticalFade = 1.0 - (cos(uv.y * 6.28) * 0.5 + 0.5);
+
+          space.y += random(space.x * warpFrequency + iTime * warpSpeed) * warpAmplitude * (0.5 + horizontalFade);
+          space.x += random(space.y * warpFrequency + iTime * warpSpeed + 2.0) * warpAmplitude * horizontalFade;
+
+          vec4 lines = vec4(0.0);
+
+          // MMI dark background gradient
+          vec4 bgColor1 = vec4(0.039, 0.039, 0.039, 1.0);
+          vec4 bgColor2 = vec4(0.055, 0.050, 0.042, 1.0);
+
+          for(int l = 0; l < linesPerGroup; l++) {
+            float normalizedLineIndex = float(l) / float(linesPerGroup);
+            float offsetTime = iTime * offsetSpeed;
+            float offsetPosition = float(l) + space.x * offsetFrequency;
+            float rand = random(offsetPosition + offsetTime) * 0.5 + 0.5;
+            float halfWidth = mix(minLineWidth, maxLineWidth, rand * horizontalFade) / 2.0;
+            float offset = random(offsetPosition + offsetTime * (1.0 + normalizedLineIndex)) * mix(minOffsetSpread, maxOffsetSpread, horizontalFade);
+            float linePosition = getPlasmaY(space.x, horizontalFade, offset);
+            float line = drawSmoothLine(linePosition, halfWidth, space.y) / 2.0 + drawCrispLine(linePosition, halfWidth * 0.15, space.y);
+            float circleX = mod(float(l) + iTime * lineSpeed, 25.0) - 12.0;
+            vec2 circlePosition = vec2(circleX, getPlasmaY(circleX, horizontalFade, offset));
+            float circle = drawCircle(circlePosition, 0.01, space) * 4.0;
+            line = line + circle;
+            lines += line * lineColor * rand;
+          }
+
+          fragColor = mix(bgColor1, bgColor2, uv.x);
+          fragColor *= verticalFade;
+          fragColor.a = 1.0;
+          // Subtler line intensity for MMI aesthetic
+          fragColor += lines * 0.45;
+          gl_FragColor = fragColor;
+        }
+      `;
+
+      const loadShader = (gl, type, source) => {
+        const shader = gl.createShader(type);
+        gl.shaderSource(shader, source);
+        gl.compileShader(shader);
+        if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+          console.error('Shader compile error:', gl.getShaderInfoLog(shader));
+          gl.deleteShader(shader);
+          return null;
+        }
+        return shader;
+      };
+
+      const initShaderProgram = (gl, vs, fs) => {
+        const vertexShader = loadShader(gl, gl.VERTEX_SHADER, vs);
+        const fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, fs);
+        if (!vertexShader || !fragmentShader) return null;
+        const program = gl.createProgram();
+        gl.attachShader(program, vertexShader);
+        gl.attachShader(program, fragmentShader);
+        gl.linkProgram(program);
+        if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+          console.error('Shader link error:', gl.getProgramInfoLog(program));
+          return null;
+        }
+        return program;
+      };
+
+      useEffect(() => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+        const gl = canvas.getContext('webgl');
+        if (!gl) {
+          console.warn('WebGL not supported');
+          return;
+        }
+
+        const shaderProgram = initShaderProgram(gl, vsSource, fsSource);
+        if (!shaderProgram) return;
+
+        const positionBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+          -1, -1, 1, -1, -1, 1, 1, 1,
+        ]), gl.STATIC_DRAW);
+
+        const programInfo = {
+          program: shaderProgram,
+          attribLocations: {
+            vertexPosition: gl.getAttribLocation(shaderProgram, 'aVertexPosition'),
+          },
+          uniformLocations: {
+            resolution: gl.getUniformLocation(shaderProgram, 'iResolution'),
+            time: gl.getUniformLocation(shaderProgram, 'iTime'),
+          },
+        };
+
+        const resizeCanvas = () => {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+          gl.viewport(0, 0, canvas.width, canvas.height);
+        };
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        let animId;
+        const startTime = Date.now();
+
+        const render = () => {
+          const t = (Date.now() - startTime) / 1000;
+          gl.clearColor(0, 0, 0, 1);
+          gl.clear(gl.COLOR_BUFFER_BIT);
+          gl.useProgram(programInfo.program);
+          gl.uniform2f(programInfo.uniformLocations.resolution, canvas.width, canvas.height);
+          gl.uniform1f(programInfo.uniformLocations.time, t);
+          gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+          gl.vertexAttribPointer(programInfo.attribLocations.vertexPosition, 2, gl.FLOAT, false, 0, 0);
+          gl.enableVertexAttribArray(programInfo.attribLocations.vertexPosition);
+          gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+          animId = requestAnimationFrame(render);
+        };
+
+        animId = requestAnimationFrame(render);
+
+        return () => {
+          cancelAnimationFrame(animId);
+          window.removeEventListener('resize', resizeCanvas);
+        };
+      }, []);
+
+      return (
+        <canvas
+          ref={canvasRef}
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            zIndex: 0,
+            pointerEvents: 'none',
+          }}
+          aria-hidden="true"
+        />
+      );
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       SCAN LINE
+       ═══════════════════════════════════════════════════════ */
+
+    function ScanLine() {
+      return <div className="scan-line" aria-hidden="true" />;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       GOLD DIVIDER
+       ═══════════════════════════════════════════════════════ */
+
+    function GoldDivider({ className = '' }) {
+      return <hr className={`gold-divider ${className}`} aria-hidden="true" />;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       SECTION LABEL
+       ═══════════════════════════════════════════════════════ */
+
+    function SectionLabel({ children }) {
+      return (
+        <span className="font-mono text-xs tracking-[0.2em] text-mmi-gold uppercase block mb-6">
+          {children}
+        </span>
+      );
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       ANIMATED SECTION WRAPPER
+       ═══════════════════════════════════════════════════════ */
+
+    function AnimatedSection({ children, className = '', delay = 0 }) {
+      const [ref, isVisible] = useInView();
+      return (
+        <div
+          ref={ref}
+          className={`reveal ${isVisible ? 'visible' : ''} ${className}`}
+          style={{ transitionDelay: `${delay}ms` }}
+        >
+          {children}
+        </div>
+      );
+    }
+
+    function AnimatedLeft({ children, className = '', delay = 0 }) {
+      const [ref, isVisible] = useInView();
+      return (
+        <div
+          ref={ref}
+          className={`reveal-left ${isVisible ? 'visible' : ''} ${className}`}
+          style={{ transitionDelay: `${delay}ms` }}
+        >
+          {children}
+        </div>
+      );
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       SVG ICONS (inline, no external lib)
+       ═══════════════════════════════════════════════════════ */
+
+    function IconHexagon({ className = 'w-8 h-8' }) {
+      return (
+        <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="square" strokeLinejoin="miter">
+          <path d="M12 2 L21.5 7.5 L21.5 16.5 L12 22 L2.5 16.5 L2.5 7.5 Z" />
+        </svg>
+      );
+    }
+
+    function IconTriangle({ className = 'w-8 h-8' }) {
+      return (
+        <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="square" strokeLinejoin="miter">
+          <path d="M12 3 L22 21 L2 21 Z" />
+        </svg>
+      );
+    }
+
+    function IconDiamond({ className = 'w-8 h-8' }) {
+      return (
+        <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="square" strokeLinejoin="miter">
+          <path d="M12 2 L22 12 L12 22 L2 12 Z" />
+        </svg>
+      );
+    }
+
+    function IconChevronDown({ className = 'w-5 h-5' }) {
+      return (
+        <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter">
+          <path d="M6 9 L12 15 L18 9" />
+        </svg>
+      );
+    }
+
+    function IconMenu({ className = 'w-6 h-6' }) {
+      return (
+        <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="square">
+          <path d="M4 7 L20 7" />
+          <path d="M4 12 L20 12" />
+          <path d="M4 17 L20 17" />
+        </svg>
+      );
+    }
+
+    function IconClose({ className = 'w-6 h-6' }) {
+      return (
+        <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="square">
+          <path d="M6 6 L18 18" />
+          <path d="M18 6 L6 18" />
+        </svg>
+      );
+    }
+
+    function IconPlus({ className = 'w-5 h-5' }) {
+      return (
+        <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="square">
+          <path d="M12 5 L12 19" />
+          <path d="M5 12 L19 12" />
+        </svg>
+      );
+    }
+
+    function IconMinus({ className = 'w-5 h-5' }) {
+      return (
+        <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="square">
+          <path d="M5 12 L19 12" />
+        </svg>
+      );
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       NAVIGATION
+       ═══════════════════════════════════════════════════════ */
+
+    function Navigation() {
+      const scrolled = useScrolled(60);
+      const [menuOpen, setMenuOpen] = useState(false);
+
+      const navLinks = [
+        { label: 'Programm', href: '#methode' },
+        { label: 'Wissenschaft', href: '#wissenschaft' },
+        { label: 'Preise', href: '#preise' },
+      ];
+
+      const handleNavClick = (e, href) => {
+        e.preventDefault();
+        setMenuOpen(false);
+        const el = document.querySelector(href);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      };
+
+      return (
+        <header>
+          <nav
+            className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
+              scrolled ? 'nav-scrolled py-3' : 'py-5'
+            }`}
+            role="navigation"
+            aria-label="Hauptnavigation"
+          >
+            <div className="max-w-[1400px] mx-auto px-6 lg:px-12 flex items-center justify-between">
+              {/* Logo */}
+              <a
+                href="#"
+                className="font-serif text-mmi-warm tracking-[0.25em] text-sm font-semibold uppercase no-underline hover:text-mmi-gold transition-colors duration-300"
+                onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+              >
+                MMI
+              </a>
+
+              {/* Desktop Links */}
+              <div className="hidden md:flex items-center gap-10">
+                {navLinks.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    onClick={(e) => handleNavClick(e, link.href)}
+                    className="font-sans text-xs tracking-[0.15em] uppercase text-mmi-secondary hover:text-mmi-gold transition-colors duration-300 no-underline"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+                <a
+                  href="#free-session"
+                  onClick={(e) => handleNavClick(e, '#cta')}
+                  className="btn-gold-outline text-xs py-2.5 px-6"
+                >
+                  Kostenlose Session
+                </a>
+              </div>
+
+              {/* Mobile Hamburger */}
+              <button
+                className="md:hidden text-mmi-gold p-2"
+                onClick={() => setMenuOpen(!menuOpen)}
+                aria-label={menuOpen ? 'Menü schließen' : 'Menü öffnen'}
+                aria-expanded={menuOpen}
+              >
+                {menuOpen ? <IconClose /> : <IconMenu />}
+              </button>
+            </div>
+          </nav>
+
+          {/* Mobile Overlay */}
+          {menuOpen && (
+            <div
+              className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-8"
+              style={{ background: 'rgba(10, 10, 10, 0.97)', backdropFilter: 'blur(24px)' }}
+              role="dialog"
+              aria-modal="true"
+              aria-label="Navigation"
+            >
+              {navLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={(e) => handleNavClick(e, link.href)}
+                  className="font-serif text-2xl tracking-[0.2em] uppercase text-mmi-warm hover:text-mmi-gold transition-colors duration-300 no-underline"
+                >
+                  {link.label}
+                </a>
+              ))}
+              <a
+                href="#free-session"
+                onClick={(e) => handleNavClick(e, '#cta')}
+                className="btn-gold mt-4"
+              >
+                Kostenlose Session
+              </a>
+            </div>
+          )}
+        </header>
+      );
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       HERO
+       ═══════════════════════════════════════════════════════ */
+
+    function Hero() {
+      const [stage, setStage] = useState(0);
+
+      useEffect(() => {
+        const timers = [
+          setTimeout(() => setStage(1), 400),
+          setTimeout(() => setStage(2), 700),
+          setTimeout(() => setStage(3), 1000),
+          setTimeout(() => setStage(4), 1400),
+          setTimeout(() => setStage(5), 1700),
+          setTimeout(() => setStage(6), 2000),
+        ];
+        return () => timers.forEach(clearTimeout);
+      }, []);
+
+      const show = (n) => stage >= n;
+
+      return (
+        <section className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-24 text-center" id="hero">
+          {/* Geometric accent lines */}
+          <div
+            className="absolute top-[15%] left-8 lg:left-16 w-px h-24 bg-gradient-to-b from-transparent via-mmi-gold-dim to-transparent transition-opacity duration-1000"
+            style={{ opacity: show(1) ? 0.3 : 0 }}
+            aria-hidden="true"
+          />
+          <div
+            className="absolute bottom-[20%] right-8 lg:right-16 w-px h-32 bg-gradient-to-b from-transparent via-mmi-gold-dim to-transparent transition-opacity duration-1000"
+            style={{ opacity: show(2) ? 0.3 : 0 }}
+            aria-hidden="true"
+          />
+          <div
+            className="absolute top-[12%] right-[10%] w-16 h-16 border border-mmi-gold-dim opacity-0 transition-opacity duration-1000"
+            style={{ opacity: show(1) ? 0.08 : 0, clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)' }}
+            aria-hidden="true"
+          />
+
+          {/* Gold accent line */}
+          <div
+            className="mb-8 h-px bg-mmi-gold transition-all duration-700 ease-out"
+            style={{ width: show(1) ? '64px' : '0px', opacity: show(1) ? 0.6 : 0 }}
+            aria-hidden="true"
+          />
+
+          {/* Institute label */}
+          <div
+            className="font-mono text-[10px] sm:text-xs tracking-[0.3em] text-mmi-gold uppercase mb-10 transition-all duration-700 ease-out"
+            style={{ opacity: show(2) ? 1 : 0, transform: show(2) ? 'translateY(0)' : 'translateY(16px)' }}
+          >
+            Montreval Mind Institute
+          </div>
+
+          {/* Headline */}
+          <h1 className="max-w-4xl">
+            <span
+              className="block font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-medium text-mmi-warm leading-[1.15] transition-all duration-700 ease-out"
+              style={{ opacity: show(3) ? 1 : 0, transform: show(3) ? 'translateY(0)' : 'translateY(32px)' }}
+            >
+              Dein mentaler Zustand
+            </span>
+            <span
+              className="block font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-medium text-mmi-warm leading-[1.15] transition-all duration-700 ease-out"
+              style={{ opacity: show(3) ? 1 : 0, transform: show(3) ? 'translateY(0)' : 'translateY(32px)', transitionDelay: '150ms' }}
+            >
+              ist kein Charakter.
+            </span>
+            <span
+              className="block font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-medium text-mmi-gold leading-[1.15] mt-2 transition-all duration-700 ease-out"
+              style={{ opacity: show(4) ? 1 : 0, transform: show(4) ? 'translateY(0)' : 'translateY(32px)' }}
+            >
+              Er ist ein Parameter.
+            </span>
+          </h1>
+
+          {/* Subline */}
+          <p
+            className="mt-8 font-sans text-base sm:text-lg text-mmi-secondary max-w-2xl leading-relaxed transition-all duration-700 ease-out"
+            style={{ opacity: show(5) ? 1 : 0, transform: show(5) ? 'translateY(0)' : 'translateY(20px)' }}
+          >
+            Entscheidungspsychologie für Unternehmer, Investoren und Führungskräfte.
+          </p>
+
+          {/* CTA */}
+          <div
+            className="mt-10 transition-all duration-700 ease-out"
+            style={{ opacity: show(6) ? 1 : 0, transform: show(6) ? 'translateY(0)' : 'translateY(20px)' }}
+          >
+            <a href="https://tentary.com/p/PLACEHOLDER-FREE" className="btn-gold">
+              Kostenlose Session starten
+            </a>
+            <p className="mt-4 font-mono text-[11px] text-mmi-secondary tracking-wider">
+              14 Minuten · Audio-geführt · Ohne Anmeldung
+            </p>
+          </div>
+
+          {/* Scroll indicator */}
+          <div
+            className="absolute bottom-8 left-1/2 -translate-x-1/2 transition-opacity duration-700"
+            style={{ opacity: show(6) ? 0.4 : 0 }}
+            aria-hidden="true"
+          >
+            <div className="animate-bounce">
+              <IconChevronDown className="w-5 h-5 text-mmi-gold" />
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       PROBLEM SECTION
+       ═══════════════════════════════════════════════════════ */
+
+    function ProblemSection() {
+      const statements = [
+        'Sie analysieren Märkte — aber nicht ihren mentalen Zustand beim Analysieren.',
+        'Sie planen Quartalsziele — aber nicht den kognitiven Modus, in dem sie planen.',
+        'Sie treffen Entscheidungen unter Druck — und verwechseln Reaktion mit Strategie.',
+      ];
+
+      return (
+        <section className="relative py-24 md:py-36 px-6" id="problem">
+          <div className="max-w-[1000px] mx-auto">
+            <AnimatedSection>
+              <SectionLabel>// Das Problem</SectionLabel>
+            </AnimatedSection>
+
+            <AnimatedSection delay={100}>
+              <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] font-medium text-mmi-warm leading-[1.3] max-w-4xl">
+                <span className="font-mono text-mmi-gold text-lg sm:text-xl md:text-2xl">95%</span> aller Führungskräfte optimieren Strategie.{' '}
+                Weniger als <span className="font-mono text-mmi-gold text-lg sm:text-xl md:text-2xl">5%</span> optimieren den Zustand, aus dem sie entscheiden.
+              </h2>
+            </AnimatedSection>
+
+            <div className="mt-16 space-y-8">
+              {statements.map((text, i) => (
+                <AnimatedSection key={i} delay={200 + i * 200}>
+                  <div className="flex items-start gap-5">
+                    <div className="w-px h-12 bg-gradient-to-b from-mmi-gold to-transparent flex-shrink-0 mt-1" aria-hidden="true" />
+                    <p className="font-sans text-base sm:text-lg text-mmi-secondary leading-relaxed">{text}</p>
+                  </div>
+                </AnimatedSection>
+              ))}
+            </div>
+
+            <AnimatedSection delay={900}>
+              <p className="mt-16 font-serif text-xl sm:text-2xl text-mmi-warm italic leading-relaxed">
+                Das Montreval Mind Institute ändert die Variable, die niemand misst.
+              </p>
+            </AnimatedSection>
+          </div>
+        </section>
+      );
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       METHOD SECTION
+       ═══════════════════════════════════════════════════════ */
+
+    function MethodSection() {
+      const pillars = [
+        {
+          num: '01',
+          icon: <IconHexagon className="w-10 h-10 text-mmi-gold opacity-60" />,
+          title: 'Zustand vor Methode',
+          text: 'Die beste Strategie scheitert im falschen mentalen Zustand. Wir trainieren zuerst den Zustand — dann greifen Ihre Methoden.',
+        },
+        {
+          num: '02',
+          icon: <IconTriangle className="w-10 h-10 text-mmi-gold opacity-60" />,
+          title: 'Audio-geführt. Ohne Termine.',
+          text: '45-minütige Sessions mit präzisen kognitiven Interventionen. Kein Therapeut, kein Coach, kein Kalender. Sie. Kopfhörer. Klarheit.',
+        },
+        {
+          num: '03',
+          icon: <IconDiamond className="w-10 h-10 text-mmi-gold opacity-60" />,
+          title: 'Der Zustand bleibt.',
+          text: 'Keine Motivation, die verfliegt. Kognitives Training baut neuronale Muster auf, die bleiben. Wie Muskelgedächtnis — für Ihr Denken.',
+        },
+      ];
+
+      return (
+        <section className="relative py-24 md:py-36 px-6" id="methode">
+          <GoldDivider className="max-w-[1400px] mx-auto mb-24" />
+          <div className="max-w-[1400px] mx-auto">
+            <AnimatedSection>
+              <SectionLabel>// Die Methode</SectionLabel>
+            </AnimatedSection>
+            <AnimatedSection delay={100}>
+              <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-medium text-mmi-warm leading-[1.3] max-w-3xl mb-16">
+                Audio-basiertes kognitives Training. Kein Coaching. Kein Seminar. Ein System.
+              </h2>
+            </AnimatedSection>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+              {pillars.map((p, i) => (
+                <AnimatedSection key={i} delay={200 + i * 150}>
+                  <div className="glass-card p-8 lg:p-10 h-full">
+                    <div className="flex items-center justify-between mb-8">
+                      <span className="font-mono text-3xl font-bold text-mmi-gold opacity-30">{p.num}</span>
+                      {p.icon}
+                    </div>
+                    <h3 className="font-serif text-xl sm:text-2xl text-mmi-warm font-medium mb-4">{p.title}</h3>
+                    <p className="font-sans text-sm sm:text-base text-mmi-secondary leading-relaxed">{p.text}</p>
+                  </div>
+                </AnimatedSection>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       SCIENCE SECTION
+       ═══════════════════════════════════════════════════════ */
+
+    function ScienceSection() {
+      const citations = [
+        {
+          name: 'Prof. Amy Arnsten',
+          institution: 'Yale University, Department of Neuroscience',
+          quote: '„Bereits moderate Stressbelastung deaktiviert den präfrontalen Kortex — das Zentrum für rationale Entscheidungen — und aktiviert primitive Hirnareale."',
+          source: 'Arnsten, A.F.T. (2009). Stress signalling pathways that impair prefrontal cortex structure and function. Nature Reviews Neuroscience, 10(6), 410–422.',
+        },
+        {
+          name: 'Prof. Antonio Damasio',
+          institution: 'University of Southern California, Brain and Creativity Institute',
+          quote: '„Emotionale Zustände sind keine Störung rationaler Entscheidungen — sie sind deren neurologische Grundlage. Ohne somatische Marker ist strategisches Denken unmöglich."',
+          source: 'Damasio, A. (1994). Descartes\u2019 Error: Emotion, Reason, and the Human Brain. Putnam.',
+        },
+        {
+          name: 'Prof. Richard Davidson',
+          institution: 'University of Wisconsin-Madison, Center for Healthy Minds',
+          quote: '„Mentale Zustände sind trainierbar. Gezielte kognitive Übungen verändern messbar die neuronale Aktivität in Arealen für Aufmerksamkeit und Emotionsregulation."',
+          source: 'Davidson, R.J. & Begley, S. (2012). The Emotional Life of Your Brain. Hudson Street Press.',
+        },
+      ];
+
+      return (
+        <section className="relative py-24 md:py-36 px-6" id="wissenschaft">
+          <GoldDivider className="max-w-[1400px] mx-auto mb-24" />
+          <div className="max-w-[1000px] mx-auto">
+            <AnimatedSection>
+              <SectionLabel>// Die Wissenschaft</SectionLabel>
+            </AnimatedSection>
+            <AnimatedSection delay={100}>
+              <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-medium text-mmi-warm leading-[1.3] max-w-3xl mb-20">
+                Gebaut auf Forschung. Nicht auf Meinungen.
+              </h2>
+            </AnimatedSection>
+
+            <div className="space-y-12">
+              {citations.map((c, i) => (
+                <AnimatedLeft key={i} delay={200 + i * 200}>
+                  <div className="flex gap-6">
+                    {/* Gold left accent */}
+                    <div className="w-0.5 bg-gradient-to-b from-mmi-gold via-mmi-gold-dim to-transparent flex-shrink-0" aria-hidden="true" />
+                    <div>
+                      <div className="mb-3">
+                        <span className="font-sans text-sm font-medium text-mmi-gold">{c.name}</span>
+                        <span className="font-mono text-[11px] text-mmi-secondary ml-3 tracking-wider">{c.institution}</span>
+                      </div>
+                      <blockquote className="font-serif text-lg sm:text-xl text-mmi-warm italic leading-relaxed mb-3">
+                        {c.quote}
+                      </blockquote>
+                      <p className="font-mono text-[10px] text-mmi-secondary leading-relaxed opacity-60">{c.source}</p>
+                    </div>
+                  </div>
+                </AnimatedLeft>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       PRICING SECTION
+       ═══════════════════════════════════════════════════════ */
+
+    function PricingSection() {
+      const plans = [
+        {
+          label: 'Clearing Session',
+          title: 'Der Ruhezustand des Strategen',
+          price: '0',
+          originalPrice: '19,90',
+          period: '',
+          features: [
+            '1 Audio-Session (14 Minuten)',
+            'Sofortiger Zugang',
+            'Keine Anmeldung erforderlich',
+          ],
+          cta: 'Jetzt kostenlos starten',
+          href: 'https://tentary.com/p/PLACEHOLDER-FREE',
+          highlight: false,
+          badge: null,
+          note: null,
+          status: null,
+        },
+        {
+          label: 'Entscheidungsfundament',
+          title: '3 Kernsessions für Ihr Fundament',
+          price: '47',
+          originalPrice: null,
+          period: 'einmalig, inkl. MwSt.',
+          features: [
+            '3 Audio-Sessions (je 45–50 Min.)',
+            'Entscheidungsanker · Mentale Belastbarkeit · Perspektivsprung',
+            'Wird auf Hauptprogramm angerechnet',
+          ],
+          cta: 'Fundament aufbauen',
+          href: 'https://tentary.com/p/PLACEHOLDER-47',
+          highlight: true,
+          badge: 'Beliebteste Wahl',
+          note: null,
+          status: null,
+        },
+        {
+          label: 'Entscheidungsarchitektur',
+          title: '10 Sessions. Das vollständige Programm.',
+          price: '247',
+          originalPrice: '297',
+          period: 'einmalig, inkl. MwSt.',
+          features: [
+            '10 Audio-Sessions (je 45–50 Min.)',
+            'Vollständiges kognitives Trainingssystem',
+            'Alle Themen: Wahrnehmung bis Entscheidungsreset',
+          ],
+          cta: 'Auf Warteliste setzen',
+          href: 'mailto:kontakt@montreval-mind.de?subject=Warteliste%20Entscheidungsarchitektur',
+          highlight: false,
+          badge: 'Komplettes System',
+          note: 'Frühzugang + Vorzugspreis für Warteliste',
+          status: 'Aktuell in Produktion',
+        },
+      ];
+
+      return (
+        <section className="relative py-24 md:py-36 px-6" id="preise">
+          <GoldDivider className="max-w-[1400px] mx-auto mb-24" />
+          <div className="max-w-[1400px] mx-auto">
+            <AnimatedSection>
+              <SectionLabel>// Programme</SectionLabel>
+            </AnimatedSection>
+            <AnimatedSection delay={100}>
+              <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-medium text-mmi-warm leading-[1.3] mb-3">
+                Der erste Schritt kostet nichts.
+              </h2>
+              <p className="font-sans text-base text-mmi-secondary mb-16">
+                Erleben Sie den Unterschied — bevor Sie entscheiden.
+              </p>
+            </AnimatedSection>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-start">
+              {plans.map((plan, i) => (
+                <AnimatedSection key={i} delay={200 + i * 150}>
+                  <div
+                    className={`glass-card p-8 lg:p-10 relative ${
+                      plan.highlight ? 'glass-card-highlight md:scale-105 md:-my-4' : ''
+                    }`}
+                  >
+                    {plan.badge && (
+                      <div className="absolute -top-3 left-8 font-mono text-[10px] tracking-[0.15em] uppercase bg-mmi-gold text-mmi-black px-3 py-1 font-bold">
+                        {plan.badge}
+                      </div>
+                    )}
+
+                    <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-mmi-gold block mb-6">
+                      {plan.label}
+                    </span>
+
+                    <h3 className="font-serif text-lg sm:text-xl text-mmi-warm font-medium mb-6">{plan.title}</h3>
+
+                    <div className="mb-6">
+                      <div className="flex items-baseline gap-3">
+                        <span className="font-serif text-4xl sm:text-5xl text-mmi-warm font-medium">
+                          <span className="font-mono">{plan.price}</span> €
+                        </span>
+                        {plan.originalPrice && (
+                          <span className="font-mono text-sm text-mmi-secondary line-through">
+                            {plan.originalPrice} €
+                          </span>
+                        )}
+                      </div>
+                      {plan.period && (
+                        <span className="font-mono text-[11px] text-mmi-secondary tracking-wider">{plan.period}</span>
+                      )}
+                    </div>
+
+                    <ul className="space-y-3 mb-8">
+                      {plan.features.map((f, j) => (
+                        <li key={j} className="flex items-start gap-3 text-sm text-mmi-secondary">
+                          <span className="text-mmi-gold mt-1.5 flex-shrink-0" aria-hidden="true">
+                            <svg width="8" height="8" viewBox="0 0 8 8"><path d="M4 0 L8 4 L4 8 L0 4 Z" fill="currentColor" /></svg>
+                          </span>
+                          {f}
+                        </li>
+                      ))}
+                    </ul>
+
+                    {plan.status && (
+                      <p className="font-mono text-[11px] text-mmi-gold-dim mb-4 tracking-wider">{plan.status}</p>
+                    )}
+
+                    <a
+                      href={plan.href}
+                      className={plan.highlight ? 'btn-gold w-full text-center' : 'btn-gold-outline w-full text-center'}
+                    >
+                      {plan.cta}
+                    </a>
+
+                    {plan.note && (
+                      <p className="font-mono text-[10px] text-mmi-secondary mt-3 text-center tracking-wider">{plan.note}</p>
+                    )}
+                  </div>
+                </AnimatedSection>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       PROCESS SECTION
+       ═══════════════════════════════════════════════════════ */
+
+    function ProcessSection() {
+      const steps = [
+        {
+          num: '01',
+          title: 'Session starten',
+          text: 'Kopfhörer auf. 45 Minuten ungestörte Zeit. Das ist alles, was Sie brauchen.',
+        },
+        {
+          num: '02',
+          title: 'Zustand trainieren',
+          text: 'Audio-geführte kognitive Interventionen. Präzise. Strukturiert. Wirkungsvoll.',
+        },
+        {
+          num: '03',
+          title: 'Anders entscheiden',
+          text: 'Der veränderte Zustand wird zum Standard. Ihre Entscheidungen werden es spiegeln.',
+        },
+      ];
+
+      return (
+        <section className="relative py-24 md:py-36 px-6" id="prozess">
+          <GoldDivider className="max-w-[1400px] mx-auto mb-24" />
+          <div className="max-w-[1400px] mx-auto">
+            <AnimatedSection>
+              <SectionLabel>// Der Prozess</SectionLabel>
+            </AnimatedSection>
+            <AnimatedSection delay={100}>
+              <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-medium text-mmi-warm leading-[1.3] mb-16">
+                Drei Schritte. Keine Komplexität.
+              </h2>
+            </AnimatedSection>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 relative">
+              {/* Connecting line (desktop) */}
+              <div className="hidden md:block absolute top-10 left-[16.5%] right-[16.5%] h-px bg-gradient-to-r from-mmi-gold-dim via-mmi-gold to-mmi-gold-dim opacity-20" aria-hidden="true" />
+
+              {steps.map((s, i) => (
+                <AnimatedSection key={i} delay={200 + i * 200}>
+                  <div className="relative">
+                    <span className="font-mono text-5xl sm:text-6xl lg:text-7xl font-bold text-mmi-gold opacity-15 block mb-4 leading-none">
+                      {s.num}
+                    </span>
+                    <div className="w-8 h-px bg-mmi-gold mb-5 opacity-40" aria-hidden="true" />
+                    <h3 className="font-serif text-xl sm:text-2xl text-mmi-warm font-medium mb-3">{s.title}</h3>
+                    <p className="font-sans text-sm sm:text-base text-mmi-secondary leading-relaxed">{s.text}</p>
+                  </div>
+                </AnimatedSection>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       FAQ SECTION
+       ═══════════════════════════════════════════════════════ */
+
+    function FAQSection() {
+      const [openIndex, setOpenIndex] = useState(null);
+
+      const faqs = [
+        {
+          q: 'Ist das Hypnose?',
+          a: 'Nein. Das Montreval Mind Institute nutzt Methoden aus der kognitiven Neurowissenschaft und Entscheidungspsychologie. Die Sessions arbeiten mit geführter Aufmerksamkeitslenkung, nicht mit Hypnose im klassischen Sinne. Sie behalten jederzeit die volle Kontrolle.',
+        },
+        {
+          q: 'Für wen ist das geeignet?',
+          a: 'Für Unternehmer, Investoren und Führungskräfte, die regelmäßig komplexe Entscheidungen unter Druck treffen. Nicht für akute psychische Erkrankungen — dafür sind Psychotherapeuten zuständig.',
+        },
+        {
+          q: 'Wie lange dauert eine Session?',
+          a: 'Die kostenlose Clearing Session dauert 14 Minuten. Alle Kernsessions des Programms sind 45–50 Minuten lang.',
+        },
+        {
+          q: 'Brauche ich Vorkenntnisse?',
+          a: 'Nein. Die Sessions sind selbsterklärend und audio-geführt. Sie benötigen nur Kopfhörer und einen ruhigen Ort.',
+        },
+        {
+          q: 'Was unterscheidet das von Meditation-Apps?',
+          a: 'Meditation-Apps trainieren Achtsamkeit. Das Montreval Mind Institute trainiert Entscheidungsfähigkeit. Jede Session hat ein spezifisches kognitives Ziel — kein allgemeines Wohlbefinden.',
+        },
+        {
+          q: 'Werden die 47\u00A0€ angerechnet?',
+          a: 'Ja. Wenn Sie das Entscheidungsfundament (47\u00A0€) kaufen und später auf das vollständige Programm upgraden, werden die 47\u00A0€ auf den Gesamtpreis angerechnet.',
+        },
+      ];
+
+      return (
+        <section className="relative py-24 md:py-36 px-6" id="faq">
+          <GoldDivider className="max-w-[1400px] mx-auto mb-24" />
+          <div className="max-w-[800px] mx-auto">
+            <AnimatedSection>
+              <SectionLabel>// Fragen</SectionLabel>
+            </AnimatedSection>
+            <AnimatedSection delay={100}>
+              <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-medium text-mmi-warm leading-[1.3] mb-16">
+                Häufig gestellte Fragen
+              </h2>
+            </AnimatedSection>
+
+            <div className="space-y-0">
+              {faqs.map((faq, i) => {
+                const isOpen = openIndex === i;
+                return (
+                  <AnimatedSection key={i} delay={150 + i * 80}>
+                    <div className="border-b border-mmi-gold/10">
+                      <button
+                        className="w-full flex items-center justify-between py-6 text-left group"
+                        onClick={() => setOpenIndex(isOpen ? null : i)}
+                        aria-expanded={isOpen}
+                        aria-controls={`faq-answer-${i}`}
+                      >
+                        <span className="font-sans text-base sm:text-lg text-mmi-warm font-medium pr-4 group-hover:text-mmi-gold transition-colors duration-300">
+                          {faq.q}
+                        </span>
+                        <span className="text-mmi-gold flex-shrink-0 transition-transform duration-300" style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0)' }}>
+                          {isOpen ? <IconMinus /> : <IconPlus />}
+                        </span>
+                      </button>
+                      <div
+                        id={`faq-answer-${i}`}
+                        className={`faq-content ${isOpen ? 'open' : ''}`}
+                        role="region"
+                        aria-labelledby={`faq-question-${i}`}
+                        style={{ paddingBottom: isOpen ? '24px' : '0' }}
+                      >
+                        <p className="font-sans text-sm sm:text-base text-mmi-secondary leading-relaxed pr-12">
+                          {faq.a}
+                        </p>
+                      </div>
+                    </div>
+                  </AnimatedSection>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       FINAL CTA SECTION
+       ═══════════════════════════════════════════════════════ */
+
+    function CTASection() {
+      return (
+        <section className="relative py-28 md:py-40 px-6 text-center" id="cta">
+          <GoldDivider className="max-w-[1400px] mx-auto mb-24" />
+
+          {/* Geometric accents */}
+          <div
+            className="absolute top-1/2 left-8 lg:left-20 -translate-y-1/2 w-12 h-12 border border-mmi-gold-dim opacity-[0.06]"
+            style={{ clipPath: 'polygon(50% 0%, 100% 100%, 0% 100%)' }}
+            aria-hidden="true"
+          />
+          <div
+            className="absolute top-1/2 right-8 lg:right-20 -translate-y-1/2 w-16 h-16 border border-mmi-gold-dim opacity-[0.06]"
+            style={{ clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)' }}
+            aria-hidden="true"
+          />
+
+          <AnimatedSection>
+            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-medium text-mmi-warm leading-[1.2] mb-4 max-w-2xl mx-auto">
+              Der erste Schritt kostet nichts.
+            </h2>
+          </AnimatedSection>
+
+          <AnimatedSection delay={150}>
+            <p className="font-sans text-lg text-mmi-secondary mb-10">
+              14 Minuten. Kopfhörer. Klarheit.
+            </p>
+          </AnimatedSection>
+
+          <AnimatedSection delay={300}>
+            <a href="https://tentary.com/p/PLACEHOLDER-FREE" className="btn-gold text-base px-12 py-4">
+              Kostenlose Session starten
+            </a>
+            <p className="mt-5 font-mono text-[11px] text-mmi-secondary tracking-wider">
+              Über 45 Minuten kognitives Training. 0 €. Keine Anmeldung.
+            </p>
+          </AnimatedSection>
+        </section>
+      );
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════════════════ */
+
+    function Footer() {
+      return (
+        <footer className="relative py-16 px-6 border-t border-mmi-gold/10">
+          <div className="max-w-[1400px] mx-auto">
+            <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-8">
+              {/* Logo & Tagline */}
+              <div className="text-center md:text-left">
+                <div className="font-serif text-sm tracking-[0.3em] uppercase text-mmi-warm font-semibold mb-3">
+                  Montreval Mind Institute
+                </div>
+                <div className="w-10 h-px bg-mmi-gold opacity-40 mb-4 mx-auto md:mx-0" aria-hidden="true" />
+                <p className="font-sans text-xs text-mmi-secondary max-w-sm leading-relaxed">
+                  Dein mentaler Zustand ist kein Charakter. Er ist ein Parameter.
+                </p>
+              </div>
+
+              {/* Links */}
+              <div className="flex flex-col items-center md:items-end gap-4">
+                <div className="flex gap-6">
+                  <a href="#impressum" className="font-sans text-xs text-mmi-secondary hover:text-mmi-gold transition-colors duration-300 no-underline tracking-wider uppercase">
+                    Impressum
+                  </a>
+                  <a href="#datenschutz" className="font-sans text-xs text-mmi-secondary hover:text-mmi-gold transition-colors duration-300 no-underline tracking-wider uppercase">
+                    Datenschutz
+                  </a>
+                </div>
+                <p className="font-mono text-[10px] text-mmi-secondary opacity-50">
+                  © 2025 Montreval Mind Institute
+                </p>
+              </div>
+            </div>
+          </div>
+        </footer>
+      );
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       APP ROOT
+       ═══════════════════════════════════════════════════════ */
+
+    function App() {
+      return (
+        <div className="relative bg-mmi-black text-mmi-warm font-sans min-h-screen">
+          <ShaderBackground />
+          <ScanLine />
+
+          <Navigation />
+
+          <main id="main-content" className="relative z-10">
+            <Hero />
+            <ProblemSection />
+            <MethodSection />
+            <ScienceSection />
+            <PricingSection />
+            <ProcessSection />
+            <FAQSection />
+            <CTASection />
+          </main>
+
+          <div className="relative z-10">
+            <Footer />
+          </div>
+        </div>
+      );
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       MOUNT
+       ═══════════════════════════════════════════════════════ */
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
