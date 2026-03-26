@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Montreval Mind Institute — Entscheidungspsychologie für Unternehmer, Investoren und Führungskräfte." />
+  <meta name="description" content="Montreval Mind Institute — Entscheidungspsychologie für Unternehmer, Führungskräfte und High Performer." />
   <title>Montreval Mind Institute</title>
 
   <!-- Fonts -->
@@ -807,10 +807,10 @@
               {/* Logo */}
               <a
                 href="#"
-                className="font-serif text-mmi-warm tracking-[0.25em] text-sm font-semibold uppercase no-underline hover:text-mmi-gold transition-colors duration-300"
+                className="block hover:opacity-80 transition-opacity duration-300"
                 onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
               >
-                MMI
+                <img src="logo.png" alt="MMI" className="h-10 w-auto" />
               </a>
 
               {/* Desktop Links */}
@@ -826,8 +826,9 @@
                   </a>
                 ))}
                 <a
-                  href="#free-session"
-                  onClick={(e) => handleNavClick(e, '#cta')}
+                  href="https://shop.montreval-mind-institute.com/p/kostenlos"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="btn-gold-outline text-xs py-2.5 px-6"
                 >
                   Kostenlose Session
@@ -866,8 +867,9 @@
                 </a>
               ))}
               <a
-                href="#free-session"
-                onClick={(e) => handleNavClick(e, '#cta')}
+                href="https://shop.montreval-mind-institute.com/p/kostenlos"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="btn-gold mt-4"
               >
                 Kostenlose Session
@@ -960,7 +962,7 @@
             className="mt-8 font-sans text-base sm:text-lg text-mmi-secondary max-w-2xl leading-relaxed transition-all duration-700 ease-out"
             style={{ opacity: show(5) ? 1 : 0, transform: show(5) ? 'translateY(0)' : 'translateY(20px)' }}
           >
-            Entscheidungspsychologie für Unternehmer, Investoren und Führungskräfte.
+            Entscheidungspsychologie für Unternehmer, Führungskräfte und High Performer.
           </p>
 
           {/* CTA */}
@@ -968,7 +970,7 @@
             className="mt-10 transition-all duration-700 ease-out"
             style={{ opacity: show(6) ? 1 : 0, transform: show(6) ? 'translateY(0)' : 'translateY(20px)' }}
           >
-            <a href="https://tentary.com/p/PLACEHOLDER-FREE" className="btn-gold">
+            <a href="https://shop.montreval-mind-institute.com/p/kostenlos" className="btn-gold">
               Kostenlose Session starten
             </a>
             <p className="mt-4 font-mono text-[11px] text-mmi-secondary tracking-wider">
@@ -1028,7 +1030,7 @@
 
             <AnimatedSection delay={900}>
               <p className="mt-16 font-serif text-xl sm:text-2xl text-mmi-warm italic leading-relaxed">
-                Das Montreval Mind Institute ändert die Variable, die niemand misst.
+                Das Montreval Mind Institute Programm ändert die Variable, die niemand misst.
               </p>
             </AnimatedSection>
           </div>
@@ -1165,36 +1167,36 @@
     function PricingSection() {
       const plans = [
         {
-          label: 'Clearing Session',
-          title: 'Der Ruhezustand des Strategen',
+          label: 'Clearing Session 01',
+          title: 'Kostprobe — Der Ruhezustand des Strategen',
           price: '0',
-          originalPrice: '19,90',
+          originalPrice: null,
           period: '',
           features: [
-            '1 Audio-Session (14 Minuten)',
+            '1 Kurzversion zum Reinschnuppern (14 Min.)',
             'Sofortiger Zugang',
             'Keine Anmeldung erforderlich',
           ],
-          cta: 'Jetzt kostenlos starten',
-          href: 'https://tentary.com/p/PLACEHOLDER-FREE',
+          cta: 'Kostenlos testen',
+          href: 'https://shop.montreval-mind-institute.com/p/kostenlos',
           highlight: false,
-          badge: null,
-          note: null,
+          badge: 'Kostprobe',
+          note: 'Kompakte Kostprobe · Die vollständigen Sessions im Programm sind 45–50 Min.',
           status: null,
         },
         {
           label: 'Entscheidungsfundament',
           title: '3 Kernsessions für Ihr Fundament',
           price: '47',
-          originalPrice: null,
+          originalPrice: '89',
           period: 'einmalig, inkl. MwSt.',
           features: [
             '3 Audio-Sessions (je 45–50 Min.)',
             'Entscheidungsanker · Mentale Belastbarkeit · Perspektivsprung',
-            'Wird auf Hauptprogramm angerechnet',
+            'Die drei wirkungsstärksten Sessions des MMI-Hauptprogramms',
           ],
           cta: 'Fundament aufbauen',
-          href: 'https://tentary.com/p/PLACEHOLDER-47',
+          href: 'https://shop.montreval-mind-institute.com/p/3sessions',
           highlight: true,
           badge: 'Beliebteste Wahl',
           note: null,
@@ -1203,8 +1205,8 @@
         {
           label: 'Entscheidungsarchitektur',
           title: '10 Sessions. Das vollständige Programm.',
-          price: '247',
-          originalPrice: '297',
+          price: '297',
+          originalPrice: null,
           period: 'einmalig, inkl. MwSt.',
           features: [
             '10 Audio-Sessions (je 45–50 Min.)',
@@ -1212,7 +1214,7 @@
             'Alle Themen: Wahrnehmung bis Entscheidungsreset',
           ],
           cta: 'Auf Warteliste setzen',
-          href: 'mailto:kontakt@montreval-mind.de?subject=Warteliste%20Entscheidungsarchitektur',
+          href: 'mailto:waitlist@montreval-mind-institute.com?subject=Warteliste%20Entscheidungsarchitektur',
           highlight: false,
           badge: 'Komplettes System',
           note: 'Frühzugang + Vorzugspreis für Warteliste',
@@ -1378,7 +1380,7 @@
         },
         {
           q: 'Für wen ist das geeignet?',
-          a: 'Für Unternehmer, Investoren und Führungskräfte, die regelmäßig komplexe Entscheidungen unter Druck treffen. Nicht für akute psychische Erkrankungen — dafür sind Psychotherapeuten zuständig.',
+          a: 'Für Unternehmer, Führungskräfte und High Performer, die regelmäßig komplexe Entscheidungen unter Druck treffen. Nicht für akute psychische Erkrankungen — dafür sind Psychotherapeuten zuständig.',
         },
         {
           q: 'Wie lange dauert eine Session?',
@@ -1393,8 +1395,8 @@
           a: 'Meditation-Apps trainieren Achtsamkeit. Das Montreval Mind Institute trainiert Entscheidungsfähigkeit. Jede Session hat ein spezifisches kognitives Ziel — kein allgemeines Wohlbefinden.',
         },
         {
-          q: 'Werden die 47\u00A0€ angerechnet?',
-          a: 'Ja. Wenn Sie das Entscheidungsfundament (47\u00A0€) kaufen und später auf das vollständige Programm upgraden, werden die 47\u00A0€ auf den Gesamtpreis angerechnet.',
+          q: 'Kann ich vom Fundament auf das vollständige Programm upgraden?',
+          a: 'Ja. Der Preis des Entscheidungsfundaments wird beim Upgrade auf die Entscheidungsarchitektur vollständig angerechnet. Sie zahlen nur die Differenz.',
         },
       ];
 
@@ -1485,7 +1487,7 @@
           </AnimatedSection>
 
           <AnimatedSection delay={300}>
-            <a href="https://tentary.com/p/PLACEHOLDER-FREE" className="btn-gold text-base px-12 py-4">
+            <a href="https://shop.montreval-mind-institute.com/p/kostenlos" className="btn-gold text-base px-12 py-4">
               Kostenlose Session starten
             </a>
             <p className="mt-5 font-mono text-[11px] text-mmi-secondary tracking-wider">
@@ -1519,10 +1521,10 @@
               {/* Links */}
               <div className="flex flex-col items-center md:items-end gap-4">
                 <div className="flex gap-6">
-                  <a href="#impressum" className="font-sans text-xs text-mmi-secondary hover:text-mmi-gold transition-colors duration-300 no-underline tracking-wider uppercase">
+                  <a href="/impressum.html" className="font-sans text-xs text-mmi-secondary hover:text-mmi-gold transition-colors duration-300 no-underline tracking-wider uppercase">
                     Impressum
                   </a>
-                  <a href="#datenschutz" className="font-sans text-xs text-mmi-secondary hover:text-mmi-gold transition-colors duration-300 no-underline tracking-wider uppercase">
+                  <a href="/datenschutz.html" className="font-sans text-xs text-mmi-secondary hover:text-mmi-gold transition-colors duration-300 no-underline tracking-wider uppercase">
                     Datenschutz
                   </a>
                 </div>
