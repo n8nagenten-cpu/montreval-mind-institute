@@ -1,8 +1,6 @@
-version: "3.8"
-
 services:
   web:
-    build: .
+    image: ghcr.io/n8nagenten-cpu/montreval-mind-institute:latest
     ports:
       - "80:80"
     restart: unless-stopped
